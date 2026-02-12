@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students JS Copy Paste</title>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+<script src="scriptt.js" defer></script>
+
+
+   <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <h1>Hi everyone, This is Sabbir!</h1>
+  <h4>Let’s have fun</h4>
+
+  <!-- ===== SECTION: INLINE PARAGRAPH WITH IMAGES ===== -->
+<section class="inline-section">
+
+  <p class="inline-para">
+    I had to leave my pet birds behind in Bangladesh and I miss them every day.
+    Meet Friday, <span class="inline-img"><img src="birds/bird5.png" alt="Friday"></span>  She is the leader of them.Pico,
+    <span class="inline-img"><img src="birds/bird2.png" alt="Pico"></span>
+    is the smallets and sweetest of all. She is all grown up now. Coco 
+    <span class="inline-img"><img src="birds/bird1.png" alt="Coco"></span>
+    is not friendly. He is male and mostly after females.  Sugar,
+    <span class="inline-img"><img src="birds/bird3.png" alt="Sugar"></span>
+    is the cutest. She loves having scrathches on head by humans. Snow,
+    <span class="inline-img"><img src="birds/bird4.png" alt="White"></span>
+    is the cleverest of all. He knwos how to open gates. There are more.
+    I love and misss them so much.
+  </p>
+
+</section>
+
+
+<!-- ===== SECTION: MOVING IMAGES ===== -->
+<section class="move-section">
+
+  <h2>Moving Images</h2>
+
+  <div class="move-wrapper">
+    <div class="move-track">
+      <img src="birds/bird1.png" alt="">
+      <img src="birds/bird2.png" alt="">
+      <img src="birds/bird3.png" alt="">
+      <img src="birds/bird4.png" alt="">
+      <img src="birds/bird5.png" alt="">
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== SECTION: ENDLESS CAROUSEL (JS) ===== -->
+<section class="js-move-section">
+
+  <h2>Moving Images (Endless Carousel)</h2>
+
+  <div class="js-move-wrapper">
+    <div class="js-move-track" id="carouselTrack">
+      <img src="birds/bird1.png">
+      <img src="birds/bird2.png">
+      <img src="birds/bird3.png">
+      <img src="birds/bird4.png">
+      <img src="birds/bird5.png">
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== SECTION: CLICK TO CHANGE IMAGE ===== -->
+<section class="click-section">
+
+  <h2>Click to Change Image</h2>
+
+  <div class="image-box">
+    <img
+      id="changeImage"
+      src="birds/bird1.png"
+      alt="Click to change image"
+    >
+    <div class="hover-text">Click on the image to change</div>
+  </div>
+
+</section>
+
+
+<!-- ===== SECTION: ROTATING BIRD ===== -->
+<section class="rotate-section">
+
+  <h2>They See Me Roll in..</h2>
+
+  <img
+    class="rotating-bird"
+    src="birds/bird5.png"
+    alt="Spinning bird"
+  >
+
+</section>
+
+
+<!-- ===== SECTION: MUSIC PLAYER ===== -->
+<section class="player-section">
+
+  <div class="player">
+    <!-- AUDIO -->
+    <audio id="audioPlayer" src="assets/song.mp3"></audio>
+
+    <!-- CONTROLS ROW -->
+    <div class="player-row">
+      <!-- Play / Pause -->
+      <button class="icon-btn" id="playPauseBtn" aria-label="Play/Pause">
+        <img id="playPauseIcon" src="assets/play.png" alt="Play">
+      </button>
+
+      <!-- Mute / Unmute -->
+      <button class="icon-btn" id="muteBtn" aria-label="Mute/Unmute">
+        <img id="muteIcon" src="assets/volume.png" alt="Mute">
+      </button>
+
+      <!-- Time -->
+      <div class="time">
+        <span id="currentTime">0:00</span>
+        <span class="time-sep">/</span>
+        <span id="duration">0:00</span>
+      </div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-wrap">
+      <input
+        type="range"
+        id="progressBar"
+        value="0"
+        min="0"
+        max="100"
+        step="0.1"
+        aria-label="Song progress"
+      >
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== SECTION: I LOVE MY BIRDS (STACKED) ===== -->
+<section class="birds-text-section">
+
+  <div class="birds-text">
+
+    <div class="line">
+      <span class="letter">I</span>
+    </div>
+
+    <div class="line">
+      <span class="letter">L</span>
+      <span class="letter">O</span>
+      <span class="letter">V</span>
+      <span class="letter">E</span>
+    </div>
+
+    <div class="line">
+      <span class="letter">M</span>
+      <span class="letter">Y</span>
+      <span class="letter">&nbsp;</span>
+      <span class="letter">B</span>
+      <span class="letter">I</span>
+      <span class="letter">R</span>
+      <span class="letter">D</span>
+      <span class="letter">S</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ===== SECTION: FONT ANIMATION ===== -->
+
+<section class="bird-anim-section">
+
+
+
+  <div class="anim-grid">
+
+    <div class="anim-card">
+      <p class="anim-title">Bounce</p>
+      <div class="bird-word bird-bounce">
+        <span>B</span><span>I</span><span>R</span><span>D</span>
+      </div>
+    </div>
+
+    <div class="anim-card">
+      <p class="anim-title">Fade</p>
+      <div class="bird-word bird-fade">
+        <span>B</span><span>I</span><span>R</span><span>D</span>
+      </div>
+    </div>
+
+    <div class="anim-card">
+      <p class="anim-title">Flip</p>
+      <div class="bird-word bird-flip">
+        <span>B</span><span>I</span><span>R</span><span>D</span>
+      </div>
+    </div>
+
+    <div class="anim-card">
+      <p class="anim-title">Tada</p>
+      <div class="bird-word bird-tada">
+        <span>B</span><span>I</span><span>R</span><span>D</span>
+      </div>
+    </div>
+
+    <div class="anim-card">
+      <p class="anim-title">HeartBeat</p>
+      <div class="bird-word bird-heart">
+        <span>B</span><span>I</span><span>R</span><span>D</span>
+      </div>
+    </div>
+
+    <div class="anim-card">
+      <p class="anim-title">HeadShake</p>
+      <div class="bird-word bird-shake">
+        <span>B</span><span>I</span><span>R</span><span>D</span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="echo-section" id="echoSection">
+  <!-- Use the SAME bird image 4–5 times for the trail -->
+  <img class="echo-layer" src="birds/mylove.png" alt="">
+  <img class="echo-layer" src="birds/mylove.png" alt="">
+  <img class="echo-layer" src="birds/mylove.png" alt="">
+  <img class="echo-layer" src="birds/mylove.png" alt="">
+  <img class="echo-layer" src="birds/mylove.png" alt="">
+</section>
+
+
+
+
+
+
+<!-- Sticky Scroll Section -->
+<section class="scroll-video" id="scrollVideo">
+  <div class="sticky">
+
+    <!-- Canvas that plays your frames (001.png → 080.png) -->
+    <canvas id="seqCanvas"></canvas>
+
+    <!-- Floating facts (middle-left, moves upward in JS) -->
+    <div class="facts" id="facts">
+      <div class="fact">
+        Cockatiels are native to Australia.<br>
+        They’re small parrots with big personalities.<br>
+        They learn routines fast and love attention.
+      </div>
+
+      <div class="fact">
+        Their crest shows mood and energy.<br>
+        Crest up = alert/curious.<br>
+        Crest flat = relaxed or resting.<br>
+        Crest pinned back can mean stress.
+      </div>
+
+      <div class="fact">
+        Cockatiels communicate constantly.<br>
+        Whistles and chirps mean different things.<br>
+        They also “talk” with posture and tail movement.
+      </div>
+
+      <div class="fact">
+        Diet matters more than people think.<br>
+        Seeds only can cause health issues over time.<br>
+        Pellets + veggies + clean water is better daily.
+      </div>
+
+      <div class="fact">
+        They bond strongly with their humans.<br>
+        Boredom can lead to screaming or feather issues.<br>
+        Toys, foraging, and time together help a lot.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <footer class="spacer">
+    <h2>End</h2>
+    <p>Scroll back up to reverse.</p>
+  </footer>
+
+
+
+
+
+    
+</body>
+</html>
