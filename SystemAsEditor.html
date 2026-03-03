@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>System As Editor</title>
+  <link rel="stylesheet" href="pickwords.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>System As Editor</h1>
+      <p class="sub">
+        A tool that translates text by selectively revealing words randomly.
+      </p>
+    </header>
+
+    <section class="card">
+      <div class="modeRow">
+        <div class="mode">
+          <span class="pill" id="modePill">MODE: MY TEXT</span>
+        </div>
+
+        <div class="controls">
+          <label class="ctl">
+            Min
+            <input id="minWords" type="number" min="1" value="6" />
+          </label>
+          <label class="ctl">
+            Max
+            <input id="maxWords" type="number" min="1" value="16" />
+          </label>
+          <label class="ctl chk">
+            <input id="keepOrder" type="checkbox" checked />
+            Keep original order
+          </label>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div>
+          <h2 class="label">SOURCE TEXT</h2>
+          <div class="panel" id="sourcePanel">
+            <p id="sourceText"></p>
+          </div>
+
+          <div class="btnRow">
+            <button id="pickBtn" class="btn primary">Pick Words</button>
+            <button id="resetBtn" class="btn">Reset</button>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="label">TRANSLATION OUTPUT</h2>
+          <div class="panel output" id="outputPanel" aria-live="polite">
+            <div id="chips" class="chips"></div>
+            <p id="outputLine" class="outputLine"></p>
+          </div>
+
+          <div class="btnRow">
+            <button id="tryYoursBtn" class="btn ghost">Try Yours</button>
+            <button id="copyBtn" class="btn">Copy Output</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="userArea" class="userArea hidden">
+        <h2 class="label">PASTE YOUR PARAGRAPH</h2>
+        <textarea id="userInput" placeholder="Paste your paragraph here..."></textarea>
+        <div class="btnRow">
+          <button id="useTextBtn" class="btn primary">Use This Text</button>
+          <button id="cancelBtn" class="btn">Cancel</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <small>
+        Tip: click “Pick Words” multiple times to see how the structure/meaning shifts.
+      </small>
+    </footer>
+  </main>
+
+  <script src="pickwods.js"></script>
+</body>
+</html>
