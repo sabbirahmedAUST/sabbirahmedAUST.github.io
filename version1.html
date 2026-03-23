@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Version 1 — Vowel Rule System</title>
+  <style>
+    :root{
+      --bg:#f4f1ea;
+      --ink:#1f1f1f;
+      --muted:#666;
+      --line:#d7d0c5;
+      --panel:#fffdf8;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+    }
+
+    .wrap{
+      width:min(1100px, 92vw);
+      margin:40px auto 60px;
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(30px,4vw,48px);
+      letter-spacing:.03em;
+    }
+
+    .sub{
+      margin:0 0 28px;
+      color:var(--muted);
+      max-width:75ch;
+      line-height:1.6;
+    }
+
+    .topnote{
+      display:inline-block;
+      margin-bottom:18px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .controls{
+      display:grid;
+      grid-template-columns:2fr 180px auto;
+      gap:12px;
+      align-items:end;
+      margin-bottom:22px;
+    }
+
+    .field label{
+      display:block;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+      color:var(--muted);
+    }
+
+    textarea, select{
+      width:100%;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--ink);
+      padding:12px;
+      font:inherit;
+    }
+
+    textarea{
+      min-height:140px;
+      resize:vertical;
+      line-height:1.6;
+    }
+
+    button{
+      border:1px solid var(--ink);
+      background:var(--ink);
+      color:#fff;
+      padding:12px 16px;
+      cursor:pointer;
+      font:inherit;
+      height:46px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      margin-bottom:20px;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      padding:18px;
+      min-height:260px;
+    }
+
+    .label{
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin:0 0 12px;
+    }
+
+    .source{
+      line-height:1.85;
+      font-size:17px;
+    }
+
+    .w{
+      padding:2px 3px;
+      border-radius:4px;
+      transition:background .2s ease;
+    }
+
+    .w.hl{
+      background:#dcd6ca;
+    }
+
+    .ordered-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(120px, 1fr));
+      gap:12px;
+      align-content:start;
+    }
+
+.word-box{
+  border:1px solid var(--ink);
+  background:white;
+  min-height:72px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  padding:10px;
+
+  font-size:16px;          /* slightly smaller */
+  text-transform:uppercase;
+  letter-spacing:.04em;
+
+  /* 🔥 IMPORTANT FIXES */
+  word-break: break-word;  /* break long words */
+  overflow-wrap: anywhere; /* allow breaking anywhere */
+}
+
+    .line-output{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .caption{
+      background:var(--panel);
+      border:1px solid var(--line);
+      padding:18px;
+      line-height:1.7;
+    }
+
+    @media (max-width:900px){
+      .controls{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .ordered-grid{grid-template-columns:repeat(2, minmax(120px, 1fr))}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topnote">Version 1 — Controlled System</div>
+    <h1>System as Editor → Vowel Rule Translation</h1>
+    <p class="sub">
+      This version uses a strict linguistic rule instead of randomness.
+      The system reveals only words that contain a minimum number of vowels,
+      turning text into a controlled editorial filter.
+    </p>
+
+    <section class="controls">
+      <div class="field">
+        <label for="sourceInput">Source text</label>
+        <textarea id="sourceInput">The Fogg Behavior Model explains that behavior occurs when three elements converge at the same moment: motivation, ability, and a prompt. If any of these elements is missing, the behavior will not happen. Motivation refers to the user’s desire to perform an action, while ability reflects how easy or difficult the action is to complete. Prompts act as triggers that initiate behavior, such as notifications, reminders, or visual cues within an interface. The model emphasizes simplicity, suggesting that increasing ability can often be more effective than increasing motivation. By reducing friction and making actions easier, designers can encourage behavior change without relying solely on persuasion. This framework is widely used in user experience design and behavioral psychology to understand how digital systems guide user decisions. It highlights how structured interactions, subtle triggers, and usability choices can shape everyday behaviors in both physical and digital environments.</textarea>
+      </div>
+
+
+
+      <div class="field">
+        <label for="vowelRule">Select words with at least</label>
+
+        <select id="vowelRule">
+  <option value="2">2 vowels</option>
+  <option value="3">3 vowels</option>
+  <option value="4">4 vowels</option>
+  <option value="5">5 vowels</option>
+        </select>
+
+
+
+      </div>
+
+      <button id="generateBtn">Generate</button>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <p class="label">Source text with selected words</p>
+        <div id="sourceView" class="source"></div>
+      </div>
+
+      <div class="panel">
+        <p class="label">Filtered translation output</p>
+        <div id="orderedGrid" class="ordered-grid"></div>
+        <div id="lineOutput" class="line-output"></div>
+      </div>
+    </section>
+
+    <section class="caption">
+      <strong>How this version works:</strong><br>
+      This controlled version applies a vowel-based linguistic rule to the source text.
+      Instead of selecting words randomly, the tool identifies only words that contain a minimum number of vowels.
+      The final output emphasizes structure, consistency, and editorial control.
+    </section>
+  </main>
+
+  <script>
+    function tokenize(text) {
+      const parts = text.match(/[\w']+|\s+|[^\w\s]+/g) || [];
+      return parts.map(p => ({
+        text: p,
+        type: /^[\w']+$/.test(p) ? "word" : "other"
+      }));
+    }
+
+    function countVowels(word) {
+      const matches = word.toLowerCase().match(/[aeiou]/g);
+      return matches ? matches.length : 0;
+    }
+
+    function buildVowelTranslation(text, minVowels) {
+      const tokens = tokenize(text);
+      const selectedWordPositions = [];
+      const tokenIndexToWordPos = new Map();
+
+      let wordPos = 0;
+
+      tokens.forEach((token, tokenIndex) => {
+        if (token.type === "word") {
+          tokenIndexToWordPos.set(tokenIndex, wordPos);
+
+          if (countVowels(token.text) >= minVowels) {
+            selectedWordPositions.push(wordPos);
+          }
+
+          wordPos++;
+        }
+      });
+
+      const wordsOnly = tokens.filter(t => t.type === "word");
+      const selectedWords = selectedWordPositions.map(pos => wordsOnly[pos].text);
+
+      return {
+        tokens,
+        selectedWordPositions,
+        tokenIndexToWordPos,
+        selectedWords
+      };
+    }
+
+    function renderSource(tokens, selectedWordPositions, tokenIndexToWordPos) {
+      const highlightSet = new Set(selectedWordPositions);
+
+      return tokens.map((t, tokenIndex) => {
+        if (t.type !== "word") return t.text;
+
+        const wordPos = tokenIndexToWordPos.get(tokenIndex);
+        const cls = highlightSet.has(wordPos) ? "w hl" : "w";
+        return `<span class="${cls}">${t.text}</span>`;
+      }).join("");
+    }
+
+function renderOrdered(words) {
+  if (!words.length) {
+    return `<div class="word-box">No words match this rule</div>`;
+  }
+
+  return words.map(word => `<div class="word-box">${word}</div>`).join("");
+}
+
+    function generate() {
+      const text = document.getElementById("sourceInput").value.trim();
+      const minVowels = parseInt(document.getElementById("vowelRule").value, 10);
+
+      const result = buildVowelTranslation(text, minVowels);
+
+      document.getElementById("sourceView").innerHTML =
+        renderSource(result.tokens, result.selectedWordPositions, result.tokenIndexToWordPos);
+
+      document.getElementById("orderedGrid").innerHTML =
+        renderOrdered(result.selectedWords);
+
+      document.getElementById("lineOutput").innerHTML =
+        `<strong>Rule:</strong> words with at least ${minVowels} vowels<br>
+         <strong>Selected words:</strong> ${result.selectedWords.join(" ")}`;
+    }
+
+    document.getElementById("generateBtn").addEventListener("click", generate);
+    document.getElementById("vowelRule").addEventListener("change", generate);
+
+    generate();
+  </script>
+</body>
+</html>
