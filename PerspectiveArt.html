@@ -114,12 +114,15 @@ video, img {
 </head>
 
 <body>
+
 <div class="progress-bar"></div>
 
 <section>
   <h1>Insight / Incite</h1>
   <p>This project presents data in a participatory way. Users actively interpret structured information, form their own mental image, and then compare it with the revealed image.</p>
-  <video controls autoplay muted loop>
+
+  <!-- ✅ FIXED VIDEO -->
+  <video autoplay muted loop playsinline>
     <source src="assets/img/perspectiveart1.mp4" type="video/mp4">
   </video>
 </section>
@@ -141,11 +144,11 @@ video, img {
   <h2>Split Perception</h2>
   <p>
     The class is divided into two groups.
-    Group A, the side that see the image will try to describe the image but only with words.
-    Group B, the other side who see only words and will try to imagine the image and write a detail description of the image.
+    Group A sees the image and describes it using words.
+    Group B sees only words and imagines the image.
   </p>
 
- <div class="grid">
+  <div class="grid">
     <img src="assets/img/p_setup3.png">
   </div>
 </section>
@@ -153,71 +156,59 @@ video, img {
 <section>
   <h2>Response</h2>
   <p>
-    Now, The cover is removed. Participants view the artwork from their perspective,
-    write responses, and pin them.
+    The cover is removed. Participants view the artwork, write responses, and pin them.
   </p>
 
- <div class="grid">
+  <div class="grid">
     <img src="assets/img/p_setup4.png">
   </div>
 </section>
 
-
-
 <section>
-  <h2>Results For Group A and B</h2>
+  <h2>Results</h2>
   <p>
-  Even though the full data was not provided, key words and their arrangement helped participants visualize the image. The results show that most of Group B imagined something related to the ocean and a boat, with very similar interpretations.
-
+  Even though the full data was not provided, key words and their arrangement helped participants visualize the image. Most imagined something related to the ocean and a boat.
   </p>
 
   <div class="grid">
     <img src="assets/img/p_setup5.png">
-
   </div>
 </section>
 
-
 <section>
   <h2>Complex Approach</h2>
-  <p>The first artwork was relatively easy, as the words were very direct. Even the colors and visual approach guided the audience clearly toward the image. To increase complexity, the second version uses only a few direct words, while others are less exact. The colors are also kept similar, making interpretation more open.</p>
-  <video controls autoplay muted loop>
+  <p>
+  The first artwork was easy and direct. The second version is more complex, with fewer clear words and less direct guidance.
+  </p>
+
+  <!-- ✅ FIXED VIDEO -->
+  <video autoplay muted loop playsinline>
     <source src="assets/img/perspectiveart2.mp4" type="video/mp4">
   </video>
-<p>For this stage, the instruction changes slightly. Participants now see only the words, visualize the image in their minds, and express it through doodling. </p>
-    <div class="grid">
+
+  <p>
+  Participants now see only words, imagine the image, and doodle it.
+  </p>
+
+  <div class="grid">
     <img src="assets/img/p_setup6.png">
   </div>
 </section>
 
-
-
 <section>
-  <h2>Results</h2>
-  <p>Surprisingly, even with less direct words and the added step of drawing, participants still remembered the key words. Despite the extra and less relevant words, they were able to almost perfectly guess the image.</p>
-  
+  <h2>Final Results</h2>
+  <p>
+  Even with fewer direct words and drawing, participants still remembered key ideas and almost guessed the image correctly.
+  </p>
 
   <div class="grid">
     <img src="assets/img/p_setup7.png">
   </div>
 </section>
 
-
 <script>
+// progress bar
 const progressBar = document.querySelector('.progress-bar');
-const sections = document.querySelectorAll('section');
-
-sections.forEach(section => section.classList.add('reveal'));
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.12 });
-
-sections.forEach(section => revealObserver.observe(section));
 
 function updateProgress() {
   const scrollTop = window.scrollY;
@@ -227,6 +218,29 @@ function updateProgress() {
 }
 
 window.addEventListener('scroll', updateProgress);
+
+// reveal animation
+const sections = document.querySelectorAll('section');
+sections.forEach(section => section.classList.add('reveal'));
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+sections.forEach(section => observer.observe(section));
+
+// ✅ autoplay fallback (important for mobile)
+document.querySelectorAll("video").forEach(video => {
+  video.muted = true;
+  video.play().catch(() => {
+    video.addEventListener("click", () => video.play());
+  });
+});
+
 window.addEventListener('load', () => {
   updateProgress();
   sections[0]?.classList.add('visible');
